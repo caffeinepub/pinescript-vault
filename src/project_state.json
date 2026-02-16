@@ -1,0 +1,214 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 5,
+  "summary": "Build a Trendoscope-style ecommerce website to sell Pine Script digital downloads, with categories, bundles, Stripe checkout, and an admin portal including invite-only access tracking.",
+  "architectural_notes": [
+    "Add a profile/account UI section that reads and displays the authenticated Internet Identity principal (for easy copy/paste), without relying on email addresses."
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "existing_features": [
+    {
+      "id": "feature-implement-internet-identity-login-and-role-protected-admin-access-so-that-only-authorized-principals-can-access-the-admin-dashboard-and-admin-actions",
+      "title": "Implement Internet Identity login and role-protected admin access so that only authorized principals can access the admin dashboard and admin actions.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-the-core-data-model-and-crud-apis-for-categories-and-ensure-products-can-be-listed-and-filtered-by-category-e-g-indicators-strategies-bundles-free-premium",
+      "title": "Create the core data model and CRUD APIs for categories and ensure products can be listed and filtered by category (e.g., Indicators, Strategies, Bundles, Free/Premium).",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-the-bundle-product-model-and-crud-apis-so-an-admin-can-define-a-bundle-that-includes-multiple-products-under-a-single-price-and-the-storefront-can-display-bundle-detail-pages",
+      "title": "Create the bundle product model and CRUD APIs so an admin can define a bundle that includes multiple products under a single price, and the storefront can display bundle detail pages.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-file-upload-and-secure-storage-for-downloadable-pine-script-files-pine-txt-associated-with-products-and-or-bundles-using-backend-managed-access-control-and-stable-storage",
+      "title": "Implement file upload and secure storage for downloadable Pine Script files (.pine/.txt) associated with products and/or bundles, using backend-managed access control and stable storage.",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-one-time-purchase-checkout-flow-using-stripe-create-a-checkout-session-for-a-selected-product-or-bundle-handle-payment-confirmation-and-record-an-order-granting-download-permissions",
+      "title": "Implement one-time purchase checkout flow using Stripe: create a checkout session for a selected product or bundle, handle payment confirmation, and record an order granting download permissions.",
+      "reqIds": [
+        "REQ-7"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-a-secure-digital-delivery-system-downloads-must-require-authorization-purchase-based-and-download-links-must-be-time-limited-and-or-single-use-tokens-issued-by-the-backend",
+      "title": "Implement a secure digital delivery system: downloads must require authorization (purchase-based), and download links must be time-limited and/or single-use tokens issued by the backend.",
+      "reqIds": [
+        "REQ-8"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-build-the-trendoscope-style-storefront-ui-with-pages-homepage-hero-featured-products-category-listings-product-detail-pages-screenshots-instructions-code-preview-disclaimer-buy-download-cta-bundle-detail-pages-and-a-basic-purchases-downloads-page",
+      "title": "Build the Trendoscope-style storefront UI with pages: Homepage (hero + featured products), category listings, product detail pages (screenshots, instructions, code preview, disclaimer, buy/download CTA), bundle detail pages, and a basic purchases/downloads page.",
+      "reqIds": [
+        "REQ-9"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-create-an-admin-dashboard-ui-that-supports-managing-products-categories-bundles-pricing-stripe-settings-uploads-and-viewing-orders-sales-history",
+      "title": "Create an admin dashboard UI that supports managing: products, categories, bundles, pricing, Stripe settings, uploads, and viewing orders/sales history.",
+      "reqIds": [
+        "REQ-10"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-implement-invite-only-access-tracking-for-products-that-require-manual-tradingview-invites-store-customer-tradingview-username-and-allow-admin-to-mark-access-status-granted-expired-username-incorrect-per-purchase-customer-product",
+      "title": "Implement invite-only access tracking for products that require manual TradingView invites: store customer TradingView username and allow admin to mark access status (granted, expired, username incorrect) per purchase/customer-product.",
+      "reqIds": [
+        "REQ-11"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-legal-compliance-pages-with-editable-content-blocks-disclaimer-terms-refund-policy-and-privacy-policy-and-link-them-in-the-site-footer",
+      "title": "Add legal/compliance pages with editable content blocks: Disclaimer, Terms, Refund Policy, and Privacy Policy, and link them in the site footer.",
+      "reqIds": [
+        "REQ-12"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-define-and-apply-a-coherent-visual-theme-not-blue-purple-by-default-dark-premium-trading-aesthetic-with-a-single-high-contrast-accent-color-consistent-typography-spacing-and-component-styling-across-storefront-and-admin",
+      "title": "Define and apply a coherent visual theme (not blue/purple by default): dark premium trading aesthetic with a single high-contrast accent color, consistent typography, spacing, and component styling across storefront and admin.",
+      "reqIds": [
+        "REQ-13"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-generated-static-brand-assets-logo-simple-icon-and-wire-them-into-the-header-favicon-and-basic-marketing-sections-without-routing-images-through-the-backend",
+      "title": "Add generated static brand assets (logo + simple icon) and wire them into the header, favicon, and basic marketing sections without routing images through the backend.",
+      "reqIds": [
+        "REQ-14"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-an-authenticated-user-facing-profile-account-area-that-displays-the-currently-logged-in-internet-identity-principal-id-as-copyable-text-e-g-a-your-principal-id-section-so-users-can-paste-it-when-requesting-admin-access",
+      "title": "Add an authenticated user-facing profile/account area that displays the currently logged-in Internet Identity Principal ID as copyable text (e.g., a “Your Principal ID” section) so users can paste it when requesting admin access.",
+      "reqIds": [
+        "REQ-15"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-expose-a-clear-navigation-path-to-the-new-existing-profile-account-area-from-the-storefront-header-navigation-so-users-can-reliably-find-their-principal-id-after-signing-in",
+      "title": "Expose a clear navigation path to the new/existing profile/account area from the storefront header/navigation so users can reliably find their Principal ID after signing in.",
+      "reqIds": [
+        "REQ-16"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-ensure-the-principal-id-display-is-derived-directly-from-the-active-internet-identity-session-the-current-identity-and-updates-correctly-after-login-logout-without-requiring-a-full-page-refresh",
+      "title": "Ensure the Principal ID display is derived directly from the active Internet Identity session (the current identity) and updates correctly after login/logout without requiring a full page refresh.",
+      "reqIds": [
+        "REQ-17"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Trendoscope-style storefront UI/UX (dark modern trading theme) with homepage, navigation, product cards, and product detail pages",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Product management for Pine Script downloads (create/edit products with title, description, screenshots, instructions, code preview, disclaimer, price/free flag)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Category system for scripts (e.g., Indicators, Strategies, Bundles, Free/Premium) with category listing pages",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Bundle products that package multiple scripts under one price (single package download or multiple downloads)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-5",
+      "summary": "Stripe payments integration for one-time purchases including backend Stripe settings panel (keys, test/live toggle, webhook secret, currency)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-6",
+      "summary": "Secure digital delivery system (post-payment download page, protected files, expiring/authorized download links, order-to-download permissions)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Admin dashboard with role-protected admin access to manage products, categories, bundles, pricing, uploads, and view sales/orders",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-8",
+      "summary": "Invite-only access tracking in admin (capture customer TradingView username; track access granted/expired/username incorrect for scripts that require manual invite)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-9",
+      "summary": "Legal/compliance pages and content blocks (disclaimer, terms, refund policy, privacy policy)",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-11",
+      "summary": "Create the core data model and CRUD APIs for products (Pine Script downloads) including: title, slug, short/long description, price amount, currency, free/paid flag, category, screenshots (static asset references), instructions, code preview text, disclaimer text, and flags for invite-only access requirements.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-15",
+      "summary": "Implement Stripe settings in the backend with an admin-editable configuration section including: secret key, publishable key, webhook secret, test/live mode toggle, and default currency.",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-16",
+      "summary": "Display the logged-in Internet Identity Principal ID in the user profile/account area (e.g., a “Your Principal ID” section) so users can copy it for admin access requests",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "gameProjectType": "none",
+  "projectName": "ScriptScope Market",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

@@ -1,0 +1,72 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-16T22:58:51.658Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 3,
+    "implemented": 3,
+    "items": [
+      {
+        "id": "REQ-15",
+        "summary": "Add an authenticated user-facing profile/account area that displays the currently logged-in Internet Identity Principal ID as copyable text (e.g., a “Your Principal ID” section) so users can paste it when requesting admin access.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/pages/store/AccountPage.tsx",
+          "frontend/src/components/account/PrincipalIdSection.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/pages/store/AccountPage.tsx",
+          "frontend/src/components/account/PrincipalIdSection.tsx"
+        ]
+      },
+      {
+        "id": "REQ-16",
+        "summary": "Expose a clear navigation path to the new/existing profile/account area from the storefront header/navigation so users can reliably find their Principal ID after signing in.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/App.tsx",
+          "frontend/src/components/layout/StoreLayout.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/App.tsx",
+          "frontend/src/components/layout/StoreLayout.tsx"
+        ]
+      },
+      {
+        "id": "REQ-17",
+        "summary": "Ensure the Principal ID display is derived directly from the active Internet Identity session (the current identity) and updates correctly after login/logout without requiring a full page refresh.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/hooks/usePrincipalId.ts",
+          "frontend/src/pages/store/AccountPage.tsx",
+          "frontend/src/components/layout/StoreLayout.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/hooks/usePrincipalId.ts",
+          "frontend/src/pages/store/AccountPage.tsx",
+          "frontend/src/components/layout/StoreLayout.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "build-request.json",
+    "build-template/README.md",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/App.tsx",
+    "frontend/src/components/account/PrincipalIdSection.tsx",
+    "frontend/src/components/layout/StoreLayout.tsx",
+    "frontend/src/hooks/usePrincipalId.ts",
+    "frontend/src/pages/store/AccountPage.tsx",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}

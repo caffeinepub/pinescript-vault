@@ -1,0 +1,74 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Profile/account area showing Internet Identity Principal ID",
+  "requirements": [
+    {
+      "id": "REQ-15",
+      "summary": "Create an authenticated account/profile page that displays the current Internet Identity Principal ID as copyable text with confirmation.",
+      "acceptanceCriteria": [
+        "When a user is logged in, the UI shows a labeled field containing the user’s Principal ID in its standard textual format (e.g., aaaaa-bbbbb-...).",
+        "A “Copy” action copies the Principal ID to the clipboard and provides a visible confirmation (toast or inline message).",
+        "If the user is not logged in, the account/profile area is not shown and the user is prompted to log in (using the existing login flow)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/pages/store/AccountPage.tsx",
+          "operation": "create",
+          "description": "Add an Account/Profile page wrapped in the existing RequireAuth component; display a “Your Principal ID” section derived from the active Internet Identity session (via the existing useInternetIdentity hook) and provide a Copy button that writes to the clipboard and shows confirmation using the app’s existing toast system. Use shadcn-ui primitives (e.g., Card/Input/Button) for consistent styling; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/account/PrincipalIdSection.tsx",
+          "operation": "create",
+          "description": "Create a focused UI component that renders the labeled Principal ID field (read-only) and a Copy action with inline/Toast feedback. Use the authorization component’s frontend capability (Internet Identity session principal via identity.getPrincipal().toString()) to populate the value; verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-16",
+      "summary": "Add a clear, authenticated-only navigation link from the storefront header to the account/profile area.",
+      "acceptanceCriteria": [
+        "From the main storefront navigation, an authenticated user can reach the profile/account area in 1 click.",
+        "The navigation element is not shown (or is disabled) when the user is not authenticated."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/App.tsx",
+          "operation": "modify",
+          "description": "Register a new TanStack Router route for the account/profile area (e.g., /account) and wire it to the new AccountPage so it is reachable by navigation; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/layout/StoreLayout.tsx",
+          "operation": "modify",
+          "description": "Add an authenticated-only navigation entry (desktop + mobile menus) that links to the account/profile route. Determine authentication from the existing Internet Identity session (useInternetIdentity) so the link hides/disables when logged out; verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-17",
+      "summary": "Ensure Principal ID is sourced from the active Internet Identity session and reacts to login/logout/identity changes without refresh.",
+      "acceptanceCriteria": [
+        "After logging in, the Principal ID appears without a manual refresh.",
+        "After logging out, the Principal ID is no longer visible and the UI returns to the logged-out state.",
+        "Switching identities (logout/login) results in the displayed Principal ID changing accordingly."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/hooks/usePrincipalId.ts",
+          "operation": "create",
+          "description": "Add a small hook that reads the active Internet Identity session from the existing useInternetIdentity hook and returns { principalId, isAuthenticated } where principalId is derived from identity.getPrincipal().toString(); ensure it updates reactively as identity changes. (Do not modify useInternetIdentity.ts per constraints.)"
+        },
+        {
+          "path": "frontend/src/pages/store/AccountPage.tsx",
+          "operation": "modify",
+          "description": "Use the new usePrincipalId hook so the Principal ID display updates immediately on login/logout and identity switching; ensure logged-out state shows the existing login prompt from RequireAuth rather than stale principal data; verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/layout/StoreLayout.tsx",
+          "operation": "modify",
+          "description": "Use the same reactive authentication signal (via usePrincipalId or useInternetIdentity) to ensure the Account/Profile nav item appears/disappears correctly after login/logout without a refresh; verify the component's usage instructions before implementing."
+        }
+      ]
+    }
+  ]
+}

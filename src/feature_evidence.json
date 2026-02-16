@@ -1,0 +1,75 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-add-an-authenticated-user-facing-profile-account-area-that-displays-the-currently-logged-in-internet-identity-principal-id-as-copyable-text-e-g-a-your-principal-id-section-so-users-can-paste-it-when-requesting-admin-access",
+      "featureTitle": "Add an authenticated user-facing profile/account area that displays the currently logged-in Internet Identity Principal ID as copyable text (e.g., a “Your Principal ID” section) so users can paste it when requesting admin access.",
+      "files": [
+        "frontend/src/components/account/PrincipalIdSection.tsx",
+        "frontend/src/pages/store/AccountPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "http-outcalls@3.0.0",
+        "stripe@3.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-15"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-expose-a-clear-navigation-path-to-the-new-existing-profile-account-area-from-the-storefront-header-navigation-so-users-can-reliably-find-their-principal-id-after-signing-in",
+      "featureTitle": "Expose a clear navigation path to the new/existing profile/account area from the storefront header/navigation so users can reliably find their Principal ID after signing in.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/layout/StoreLayout.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "http-outcalls@3.0.0",
+        "stripe@3.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-16"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-ensure-the-principal-id-display-is-derived-directly-from-the-active-internet-identity-session-the-current-identity-and-updates-correctly-after-login-logout-without-requiring-a-full-page-refresh",
+      "featureTitle": "Ensure the Principal ID display is derived directly from the active Internet Identity session (the current identity) and updates correctly after login/logout without requiring a full page refresh.",
+      "files": [
+        "frontend/src/components/layout/StoreLayout.tsx",
+        "frontend/src/hooks/usePrincipalId.ts",
+        "frontend/src/pages/store/AccountPage.tsx"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "blob-storage@4.0.0",
+        "http-outcalls@3.0.0",
+        "stripe@3.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-17"
+      ],
+      "confidence": "high"
+    }
+  ]
+}
