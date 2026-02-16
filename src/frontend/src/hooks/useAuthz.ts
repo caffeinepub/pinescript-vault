@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useActor } from './useActor';
 import type { UserProfile, UserRole } from '../backend';
+import { Principal } from '@dfinity/principal';
 
 export function useGetCallerUserProfile() {
   const { actor, isFetching: actorFetching } = useActor();
@@ -65,5 +66,22 @@ export function useIsCallerAdmin() {
       }
     },
     enabled: !!actor && !isFetching,
+  });
+}
+
+export function useAssignUserRole() {
+  const { actor } = useActor();
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: async (params: { principal: string; role: UserRole }) => {
+      if (!actor) throw new Error('Actor not available');
+      const principalObj = Principal.fromText(params.principal);
+      await actor.assignCallerUserRole(principalObj, params.role);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['currentUserRole'] });
+      queryClient.invalidateQueries({ queryKey: ['isCallerAdmin'] });
+    },
   });
 }

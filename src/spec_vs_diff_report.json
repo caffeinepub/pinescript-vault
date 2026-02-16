@@ -1,18 +1,45 @@
 {
   "kind": "spec_vs_diff_report",
   "version": "1.0",
-  "generatedAt": "2026-02-16T22:58:51.652Z",
-  "summary": "Diff adds a new authenticated /account page that displays the active Internet Identity Principal ID with copy-to-clipboard + toast confirmation, and adds an authenticated-only header navigation link to reach the account area. Principal ID is derived from the current Internet Identity session via a new hook (usePrincipalId) that reads identity.getPrincipal().toString().",
-  "missing_requirements": [],
-  "hallucinated_features": [],
+  "generatedAt": "2026-02-16T23:07:32.495Z",
+  "summary": "The diff adds a new admin “User Management” page and client hooks to assign roles, but it does not provide clear evidence that the specific Internet Identity principal was granted admin permissions in the backend as required.",
+  "missing_requirements": [
+    {
+      "id": "REQ-18",
+      "requirement": "Grant admin role permissions to the Internet Identity Principal \"7bzkw-ue5am-s2c6f-jvpfm-5uxw7-dkk76-u56hj-psrgc-hja4r-mztcz-xqe\" so this principal can access admin routes and pass admin-only backend checks.",
+      "reason": "In the provided backend diff snippet, there is no explicit allowlist entry, role assignment, or hardcoded admin principal for the specified principal ID. The shown changes do not demonstrate that AccessControl.isAdmin/hasPermission will return true for that specific principal, which is necessary to satisfy the admin route guard and admin-only backend methods.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Admin UI for managing/assigning roles to arbitrary users by Principal ID (\"User Management\" page) and corresponding route/navigation entry.",
+      "reason": "The BuildRequest explicitly scoped the change to granting admin access to a single provided principal and listed as a non-goal building a general-purpose UI for managing admins/roles. The diff adds a role assignment UI and new admin route.",
+      "evidence": [
+        "frontend/src/pages/admin/AdminUsersPage.tsx",
+        "frontend/src/pages/admin/AdminDashboardLayout.tsx",
+        "frontend/src/App.tsx",
+        "frontend/src/hooks/useAuthz.ts"
+      ]
+    },
+    {
+      "description": "New frontend mutation hook to assign roles to other principals (useAssignUserRole calling assignCallerUserRole).",
+      "reason": "Not requested by REQ-18; REQ-18 only asks to grant admin to one specified principal, not to implement role assignment tooling/API usage from the frontend.",
+      "evidence": [
+        "frontend/src/hooks/useAuthz.ts"
+      ]
+    }
+  ],
   "confidence": 0.74,
   "changed_files": [
+    "backend/main.mo",
     "frontend-file-summaries.txt",
     "frontend/src/App.tsx",
-    "frontend/src/components/account/PrincipalIdSection.tsx",
-    "frontend/src/components/layout/StoreLayout.tsx",
-    "frontend/src/hooks/usePrincipalId.ts",
-    "frontend/src/pages/store/AccountPage.tsx",
+    "frontend/src/hooks/useAuthz.ts",
+    "frontend/src/pages/admin/AdminDashboardLayout.tsx",
+    "frontend/src/pages/admin/AdminUsersPage.tsx",
     "project_state.json"
   ]
 }

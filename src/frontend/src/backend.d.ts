@@ -110,6 +110,7 @@ export enum UserRole {
 }
 export interface backendInterface {
     assignCallerUserRole(user: Principal, role: UserRole): Promise<void>;
+    bootstrap(adminToken: string, userProvidedToken: string): Promise<void>;
     createBundle(bundle: Bundle): Promise<void>;
     createCheckoutSession(items: Array<ShoppingItem>, successUrl: string, cancelUrl: string): Promise<string>;
     createInviteStatus(username: string, status: InviteStatusType, productId: string, orderId: string, buyer: Principal): Promise<void>;

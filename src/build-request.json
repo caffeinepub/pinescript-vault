@@ -1,74 +1,49 @@
 {
   "kind": "build_request",
-  "title": "Show Internet Identity Principal ID in user profile/account area",
-  "projectName": "ScriptScope Market",
+  "title": "Grant admin access to provided Internet Identity principal",
+  "projectName": "Trendoscope Store",
   "priority": "normal",
   "requirements": [
     {
-      "id": "REQ-15",
-      "text": "Add an authenticated user-facing profile/account area that displays the currently logged-in Internet Identity Principal ID as copyable text (e.g., a “Your Principal ID” section) so users can paste it when requesting admin access.",
-      "target": "frontend",
+      "id": "REQ-18",
+      "text": "Grant admin role permissions to the Internet Identity Principal \"7bzkw-ue5am-s2c6f-jvpfm-5uxw7-dkk76-u56hj-psrgc-hja4r-mztcz-xqe\" so that this principal can access the admin dashboard and perform admin-only backend actions (e.g., configuring Stripe, managing products/bundles/uploads).",
+      "target": "backend",
       "source": {
         "messageIds": [
-          "msg-20"
+          "msg-6"
         ],
         "quotes": [
-          "i dont see it can you display in profile",
-          "ok do it"
+          "7bzkw-ue5am-s2c6f-jvpfm-5uxw7-dkk76-u56hj-psrgc-hja4r-mztcz-xqe"
         ]
       },
       "acceptanceCriteria": [
-        "When a user is logged in, the UI shows a labeled field containing the user’s Principal ID in its standard textual format (e.g., aaaaa-bbbbb-...).",
-        "A “Copy” action copies the Principal ID to the clipboard and provides a visible confirmation (toast or inline message).",
-        "If the user is not logged in, the account/profile area is not shown and the user is prompted to log in (using the existing login flow)."
-      ]
-    },
-    {
-      "id": "REQ-16",
-      "text": "Expose a clear navigation path to the new/existing profile/account area from the storefront header/navigation so users can reliably find their Principal ID after signing in.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-20"
-        ],
-        "quotes": [
-          "display in profile"
-        ]
-      },
-      "acceptanceCriteria": [
-        "From the main storefront navigation, an authenticated user can reach the profile/account area in 1 click.",
-        "The navigation element is not shown (or is disabled) when the user is not authenticated."
-      ]
-    },
-    {
-      "id": "REQ-17",
-      "text": "Ensure the Principal ID display is derived directly from the active Internet Identity session (the current identity) and updates correctly after login/logout without requiring a full page refresh.",
-      "target": "frontend",
-      "source": {
-        "messageIds": [
-          "msg-20"
-        ],
-        "quotes": [
-          "i dont see it can you display in profile"
-        ]
-      },
-      "acceptanceCriteria": [
-        "After logging in, the Principal ID appears without a manual refresh.",
-        "After logging out, the Principal ID is no longer visible and the UI returns to the logged-out state.",
-        "Switching identities (logout/login) results in the displayed Principal ID changing accordingly."
+        "When logged in as principal 7bzkw-ue5am-s2c6f-jvpfm-5uxw7-dkk76-u56hj-psrgc-hja4r-mztcz-xqe, navigating to admin routes no longer shows the \"Access Denied\" state and admin pages render normally.",
+        "Backend calls protected by admin checks (e.g., setStripeConfiguration, createProduct, updateProduct, createBundle) succeed for this principal.",
+        "Non-admin principals continue to be denied access to admin routes and admin-only backend methods."
       ]
     }
   ],
   "constraints": [
-    "Do not modify files under frontend/src/hooks/useInternetIdentity.ts or other paths listed in frontend.immutablePaths; compose new UI/components and routes around the existing auth hooks.",
-    "Do not change the backend authorization/admin model as part of this request; this change is UI-only for displaying/copying the Principal ID."
+    "Backend must remain a single Motoko actor in backend/main.mo; do not introduce additional backend services.",
+    "Do not modify frontend files under frontend/immutablePaths (e.g., frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useActor.ts, frontend/src/main.tsx, frontend/src/components/ui/*).",
+    "Use English for any user-facing text."
   ],
   "nonGoals": [
-    "Automatically granting admin access based on email address or displaying any email-based identifier for admin access.",
-    "Changing the existing admin role assignment flow or bypassing Access Denied checks."
+    "Building a general-purpose UI for managing admins/roles (beyond granting access to the provided principal).",
+    "Adding or changing any non-admin storefront functionality."
   ],
   "imageRequirements": {
     "required": [],
     "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
   }
 }

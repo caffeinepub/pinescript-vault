@@ -10,6 +10,7 @@ import {
   ShoppingCart,
   UserCheck,
   ArrowLeft,
+  Users,
 } from 'lucide-react';
 
 export default function AdminDashboardLayout() {
@@ -23,6 +24,7 @@ export default function AdminDashboardLayout() {
     { path: '/admin/stripe', label: 'Stripe Settings', icon: CreditCard },
     { path: '/admin/orders', label: 'Orders', icon: ShoppingCart },
     { path: '/admin/invites', label: 'Invite Requests', icon: UserCheck },
+    { path: '/admin/users', label: 'User Management', icon: Users },
   ];
 
   return (

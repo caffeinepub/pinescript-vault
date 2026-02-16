@@ -17,8 +17,10 @@ import Stripe "stripe/stripe";
 
 actor {
   let accessControlState = AccessControl.initState();
-  include MixinAuthorization(accessControlState);
-  include MixinStorage();
+
+  public shared ({ caller }) func bootstrap(adminToken : Text, userProvidedToken : Text) : async () {
+    ignore AccessControl.initialize(accessControlState, caller, adminToken, userProvidedToken);
+  };
 
   // User Profile Type
   public type UserProfile = {
@@ -116,6 +118,10 @@ actor {
     #usernameIncorrect;
   };
 
+  let initialized = false;
+  include MixinStorage();
+  include MixinAuthorization(accessControlState);
+
   // Stores
   let products = Map.empty<Text, Product>();
   let categories = Set.empty<Text>();
@@ -127,7 +133,10 @@ actor {
   // Stripe configuration
   var stripeConfiguration : ?Stripe.StripeConfiguration = null;
 
-  public query func isStripeConfigured() : async Bool {
+  public query ({ caller }) func isStripeConfigured() : async Bool {
+    if (not AccessControl.isAdmin(accessControlState, caller)) {
+      Runtime.trap("Unauthorized: Only admins can check Stripe configuration");
+    };
     stripeConfiguration != null;
   };
 
@@ -149,11 +158,17 @@ actor {
     OutCall.transform(input);
   };
 
-  public func getStripeSessionStatus(sessionId : Text) : async Stripe.StripeSessionStatus {
+  public shared ({ caller }) func getStripeSessionStatus(sessionId : Text) : async Stripe.StripeSessionStatus {
+    if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
+      Runtime.trap("Unauthorized: Only users can check session status");
+    };
     await Stripe.getSessionStatus(getStripeConfiguration(), sessionId, transform);
   };
 
   public shared ({ caller }) func createCheckoutSession(items : [Stripe.ShoppingItem], successUrl : Text, cancelUrl : Text) : async Text {
+    if (not (AccessControl.hasPermission(accessControlState, caller, #user))) {
+      Runtime.trap("Unauthorized: Only users can create checkout sessions");
+    };
     await Stripe.createCheckoutSession(getStripeConfiguration(), caller, items, successUrl, cancelUrl, transform);
   };
 
@@ -274,7 +289,7 @@ actor {
     };
   };
 
-  public func getCartTotal(items : [CartItem]) : async Nat {
+  public query ({ caller }) func getCartTotal(items : [CartItem]) : async Nat {
     // Public access - cart total calculation
     var total = 0;
     for (item in items.values()) {
@@ -288,7 +303,7 @@ actor {
     total;
   };
 
-  public func getCartTotalWithShipping(items : [CartItem], shipping : Nat) : async Nat {
+  public query ({ caller }) func getCartTotalWithShipping(items : [CartItem], shipping : Nat) : async Nat {
     // Public access - cart total with shipping
     var total = shipping;
     for (item in items.values()) {

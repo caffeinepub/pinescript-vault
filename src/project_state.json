@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "projectStateVersion": 5,
+  "projectStateVersion": 7,
   "summary": "Build a Trendoscope-style ecommerce website to sell Pine Script digital downloads, with categories, bundles, Stripe checkout, and an admin portal including invite-only access tracking.",
   "architectural_notes": [
     "Add a profile/account UI section that reads and displays the authenticated Internet Identity principal (for easy copy/paste), without relying on email addresses."
@@ -204,6 +204,14 @@
       "id": "AR-16",
       "summary": "Display the logged-in Internet Identity Principal ID in the user profile/account area (e.g., a “Your Principal ID” section) so users can copy it for admin access requests",
       "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-17",
+      "summary": "Grant admin role permissions to the Internet Identity Principal \"7bzkw-ue5am-s2c6f-jvpfm-5uxw7-dkk76-u56hj-psrgc-hja4r-mztcz-xqe\" so that this principal can access the admin dashboard and perform admin-only backend actions (e.g., configuring Stripe, managing products/bundles/uploads).",
+      "reqIds": [
+        "REQ-18"
+      ],
       "status": "pending"
     }
   ],

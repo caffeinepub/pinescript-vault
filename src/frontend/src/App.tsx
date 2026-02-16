@@ -22,6 +22,7 @@ import AdminBundlesPage from './pages/admin/AdminBundlesPage';
 import AdminStripeSettingsPage from './pages/admin/AdminStripeSettingsPage';
 import AdminOrdersPage from './pages/admin/AdminOrdersPage';
 import AdminInviteRequestsPage from './pages/admin/AdminInviteRequestsPage';
+import AdminUsersPage from './pages/admin/AdminUsersPage';
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -151,6 +152,12 @@ const adminInvitesRoute = createRoute({
   component: AdminInviteRequestsPage,
 });
 
+const adminUsersRoute = createRoute({
+  getParentRoute: () => adminRoute,
+  path: '/users',
+  component: AdminUsersPage,
+});
+
 const routeTree = rootRoute.addChildren([
   indexRoute,
   productRoute,
@@ -172,6 +179,7 @@ const routeTree = rootRoute.addChildren([
     adminStripeRoute,
     adminOrdersRoute,
     adminInvitesRoute,
+    adminUsersRoute,
   ]),
 ]);
 

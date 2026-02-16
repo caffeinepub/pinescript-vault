@@ -139,6 +139,7 @@ export const idlService = IDL.Service({
   '_caffeineStorageUpdateGatewayPrincipals' : IDL.Func([], [], []),
   '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
   'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
+  'bootstrap' : IDL.Func([IDL.Text, IDL.Text], [], []),
   'createBundle' : IDL.Func([Bundle], [], []),
   'createCheckoutSession' : IDL.Func(
       [IDL.Vec(ShoppingItem), IDL.Text, IDL.Text],
@@ -159,11 +160,11 @@ export const idlService = IDL.Service({
   'getBundle' : IDL.Func([IDL.Text], [Bundle], ['query']),
   'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
   'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
-  'getCartTotal' : IDL.Func([IDL.Vec(CartItem)], [IDL.Nat], []),
+  'getCartTotal' : IDL.Func([IDL.Vec(CartItem)], [IDL.Nat], ['query']),
   'getCartTotalWithShipping' : IDL.Func(
       [IDL.Vec(CartItem), IDL.Nat],
       [IDL.Nat],
-      [],
+      ['query'],
     ),
   'getInviteStatuses' : IDL.Func([], [IDL.Vec(InviteStatus)], ['query']),
   'getMyInviteStatuses' : IDL.Func([], [IDL.Vec(InviteStatus)], ['query']),
@@ -322,6 +323,7 @@ export const idlFactory = ({ IDL }) => {
     '_caffeineStorageUpdateGatewayPrincipals' : IDL.Func([], [], []),
     '_initializeAccessControlWithSecret' : IDL.Func([IDL.Text], [], []),
     'assignCallerUserRole' : IDL.Func([IDL.Principal, UserRole], [], []),
+    'bootstrap' : IDL.Func([IDL.Text, IDL.Text], [], []),
     'createBundle' : IDL.Func([Bundle], [], []),
     'createCheckoutSession' : IDL.Func(
         [IDL.Vec(ShoppingItem), IDL.Text, IDL.Text],
@@ -342,11 +344,11 @@ export const idlFactory = ({ IDL }) => {
     'getBundle' : IDL.Func([IDL.Text], [Bundle], ['query']),
     'getCallerUserProfile' : IDL.Func([], [IDL.Opt(UserProfile)], ['query']),
     'getCallerUserRole' : IDL.Func([], [UserRole], ['query']),
-    'getCartTotal' : IDL.Func([IDL.Vec(CartItem)], [IDL.Nat], []),
+    'getCartTotal' : IDL.Func([IDL.Vec(CartItem)], [IDL.Nat], ['query']),
     'getCartTotalWithShipping' : IDL.Func(
         [IDL.Vec(CartItem), IDL.Nat],
         [IDL.Nat],
-        [],
+        ['query'],
       ),
     'getInviteStatuses' : IDL.Func([], [IDL.Vec(InviteStatus)], ['query']),
     'getMyInviteStatuses' : IDL.Func([], [IDL.Vec(InviteStatus)], ['query']),
